@@ -100,28 +100,14 @@ function updateStatus() {
       var a = axes[i];
       a.innerHTML = i + ": " + controller.axes[i].toFixed(4);
       a.setAttribute("value", controller.axes[i] + 1);
-      /*
-      var index = ((controller.axes[i]) > 0.5 ? 2 : 
-              ((controller.axes[i] < -0.5) ? 0 : 1));
-      var new_value;
-      if(i == 0)
-          new_value = ["l", "_", "r"][index]
-      else if(i == 1)
-          new_value = ["g", "s", "d"][index]
-      if(new_value != previous_joy_values[i])
-      {
-          send([new_value]);
-          previous_joy_values[i] = new_value;
-      }
-      */
       if(i < previous_joy_values.length)
       {
-          var new_value = Math.floor(32767 * controller.axes[i])
-              if(new_value != previous_joy_values[i])
-              {
-                  send([["x", "y"][i] + "/" + new_value]);
-                  previous_joy_values[i] = new_value;
-              }
+          var new_value = Math.floor(32767 * (Math.floor(10 * controller.axes[i]) / 10));
+          if(new_value != previous_joy_values[i])
+          {
+              send([["x", "y"][i] + "/" + new_value]);
+              previous_joy_values[i] = new_value;
+          }
       }
     }
   }

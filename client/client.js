@@ -12,4 +12,3 @@ function send(msg)
     n++;
     n = n % 20;
 }
-
