@@ -1,0 +1,24 @@
+<style>
+.block {
+    width: 30%;
+    height: 30%;
+    display: inline-block;
+    border: 1px solid grey;
+}
+.block:hover {
+    background-color: grey;
+}
+</style>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="client.js"></script>
+<script>
+var msgs = ["al", "a_", "ar",
+    "sl", "s_", "sr",
+    "dl", "d_", "dr"];
+for(var i in msgs)
+{
+    document.write("<div class='block' "
+            + "onmouseover='send(\"" + msgs[i]+ "\")'></div>");
+}
+</script>
+<input type="button" value="stop" onclick="send(['quit'])"/>

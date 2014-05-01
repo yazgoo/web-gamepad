@@ -1,0 +1,37 @@
+<style>
+.block {
+    width: 30%;
+    height: 30%;
+    display: inline-block;
+    border: 1px solid grey;
+}
+.block:hover {
+    background-color: grey;
+}
+</style>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+var n = 0;
+function send(msg)
+{
+    for(var i in msg)
+    {
+        $.ajax({ url: '/' + msg[i],
+                type: 'PUT',
+                success: function(result) { console.log(result) }
+                });
+        console.log(n + " " + msg[i]);
+    }
+    n++;
+    n = n % 20;
+}
+var msgs = ["al", "a_", "ar",
+    "sl", "s_", "sr",
+    "dl", "d_", "dr"];
+for(var i in msgs)
+{
+    document.write("<div class='block' "
+            + "onmouseover='send(\"" + msgs[i]+ "\")'></div>");
+}
+</script>
+<input type="button" value="stop" onclick="send(['quit'])"/>
