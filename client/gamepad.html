@@ -55,7 +55,8 @@ function removegamepad(gamepad) {
   delete controllers[gamepad.index];
 }
 
-var previous_values = ["_", "s"]
+var previous_joy_values = [0, 0]
+var previous_key_values = ["A", "B", "X", "Y"]
 function updateStatus() {
   if (!haveEvents) {
     scangamepads();
@@ -79,6 +80,19 @@ function updateStatus() {
       } else {
         b.className = "button";
       }
+      if(i < previous_key_values.length)
+      {
+            new_value = previous_key_values[i];
+            if(pressed)
+                new_value = new_value.toUpperCase();
+            else
+                new_value = new_value.toLowerCase();
+            if(new_value != previous_key_values[i])
+            {
+                send([new_value]);
+                previous_key_values[i] = new_value;
+            }
+      }
     }
 
     var axes = d.getElementsByClassName("axis");
@@ -86,17 +100,28 @@ function updateStatus() {
       var a = axes[i];
       a.innerHTML = i + ": " + controller.axes[i].toFixed(4);
       a.setAttribute("value", controller.axes[i] + 1);
+      /*
       var index = ((controller.axes[i]) > 0.5 ? 2 : 
               ((controller.axes[i] < -0.5) ? 0 : 1));
       var new_value;
       if(i == 0)
           new_value = ["l", "_", "r"][index]
       else if(i == 1)
-          new_value = ["a", "s", "d"][index]
-      if(new_value != previous_values[i])
+          new_value = ["g", "s", "d"][index]
+      if(new_value != previous_joy_values[i])
       {
           send([new_value]);
-          previous_values[i] = new_value;
+          previous_joy_values[i] = new_value;
+      }
+      */
+      if(i < previous_joy_values.length)
+      {
+          var new_value = Math.floor(32767 * controller.axes[i])
+              if(new_value != previous_joy_values[i])
+              {
+                  send([["x", "y"][i] + "/" + new_value]);
+                  previous_joy_values[i] = new_value;
+              }
       }
     }
   }

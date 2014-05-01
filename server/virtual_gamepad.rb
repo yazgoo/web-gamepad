@@ -74,12 +74,14 @@ class VirtualGamePad
     end
     def initialize name, &block
         file = "/dev/uinput"
-        @keys = [ KEY_RESERVED, KEY_ESC,
-                    BTN_LEFT, BTN_RIGHT, BTN_FORWARD, BTN_BACK,
+#        KEY_RESERVED, KEY_ESC,
+#                    BTN_LEFT, BTN_RIGHT, BTN_FORWARD, BTN_BACK,
+#        BTN_TL, BTN_TR, BTN_TL2, BTN_TR2,
+#                    BTN_SELECT, BTN_START, BTN_THUMBL, BTN_THUMBR,
+#                    BTN_JOYSTICK
+        @keys = [ 
                     BTN_A, BTN_B, BTN_X, BTN_Y,
-                    BTN_TL, BTN_TR, BTN_TL2, BTN_TR2,
-                    BTN_SELECT, BTN_START, BTN_THUMBL, BTN_THUMBR,
-                    BTN_JOYSTICK ]
+                     ]
         File.open(file, File::NONBLOCK + File::WRONLY) do |f|
             @f = f
             @absolute_axes = [ABS_X, ABS_Y, ABS_RX, ABS_RY]
@@ -120,6 +122,7 @@ class GInputEvent
 end
 class KeyEvent < GInputEvent
     def initialize code, value
+        p code, value
         super EV_KEY, code, value
     end
 end

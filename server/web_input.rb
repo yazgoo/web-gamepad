@@ -7,8 +7,10 @@ class WebInput
                   mime_type :js, 'text/javascript'
             end
             put '/:cmd' do |cmd|
-                p cmd
-                yield cmd
+                yield cmd, nil
+            end
+            put '/:cmd/:arg' do |cmd, arg|
+                yield cmd, arg
             end
             get '/grid' do
                 File.read(File.join('../client', 'grid.html'))
