@@ -1,0 +1,88 @@
+<style>
+.vg {
+    text-align: center;
+    width: 500px;
+    font-size: 70px;
+}
+@keyframes translating {
+    0% {
+        transform: translate(100px, 0px);
+    }
+    50% {
+        transform: translate(-100px, 0px);
+    }
+    100% {
+        transform: translate(100px, 0px);
+    }
+}
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes antiblink {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+.translated {
+    animation: translating 2s;
+    animation-iteration-count: infinite;
+}
+.blinked {
+    animation: blink 2s;
+    animation-iteration-count: infinite;
+}
+.antiblinked {
+    animation: antiblink 2s;
+    animation-iteration-count: infinite;
+}
+.flipped {
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+}
+</style>
+<div id=impress>
+    <div class="step" data-x=700 data-y=-600
+        style="width: 700px;">
+        <img width=100 src=image/arrow.svg class="antiblinked"/>
+        <img src=image/gamepad.png />
+        <img width=100 class="blinked flipped" src=image/arrow.svg />
+    </div>
+    <div class=arrow></div>
+    <div class="step box" data-x=700 data-y=400>web-browser 
+        (gamepad API)</div>
+    <div class=arrow></div>
+    <div class="step" data-y=400 data-x=0><img src=image/cloud.svg width=300 /></div>
+    <div class=arrow></div>
+    <div class="step box" data-y=400 data-x=-700>web-server</div>
+    <div class=arrow></div>
+    <div class="step box" data-y=-100 data-x=-700>Linux/uinput</div>
+    <div class=arrow></div>
+    <div class="step vg" data-y=-600 data-x=-700>
+        <img src=image/supertuxkart.png class=translated />
+        <br/>
+        video game
+    </div>
+    <div id=done0 class=step data-scale=2 data-y=0></div>
+    <div id=done class=step data-scale=1.9 data-y=-900></div>
+</div>
+<script type=text/javascript src=https://cdn.rawgit.com/yazgoo/impress_arrows/master/impress_arrows_all.js>
+</script>
+
